@@ -63,7 +63,7 @@ export const FormLogin = styled.div`
     margin: 20px 0 30px 0;
   }
 
-  p {
+  h4 {
     color: #868e96;
     font-size: 12px;
     text-align: center;
@@ -90,6 +90,11 @@ export const FormLogin = styled.div`
     }
     .buttonSubmit {
       height: 48px;
+    }
+    p {
+      padding-top: 8px;
+      color: #ff577f;
+      font-size: 10px;
     }
   }
 `;

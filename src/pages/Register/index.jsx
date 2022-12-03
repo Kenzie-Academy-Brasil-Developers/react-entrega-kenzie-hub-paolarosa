@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export function Register() {
+export const Register = () => {
   const navigate = useNavigate();
   const handleRedirect = () => {
     navigate("/login");
@@ -26,7 +26,7 @@ export function Register() {
         "Telefone obrigatório em formato: (99) 9999-9999 ou (99) 99999-9999"
       )
       .matches("^((\\+\\d{2}\\s)?\\(\\d{2}\\)\\s?\\d{4}\\d?\\-\\d{4})?$"),
-    bio: yup.string().required("Bio obrigatória"),
+    bio: yup.string().required("Biografia obrigatória"),
   });
 
   const {
@@ -38,7 +38,6 @@ export function Register() {
   });
 
   const submit = (data) => {
-    console.log(data);
     api
       .post("/users", data)
       .then((response) => {
@@ -84,7 +83,7 @@ export function Register() {
             {...register("password")}
           />
           <p>{errors.password?.message}</p>
-          <label>Bio</label>
+          <label>Biografia</label>
           <textarea placeholder="Fale sobre você" {...register("bio")} />
           <p>{errors.bio?.message}</p>
           <label>Contato</label>
@@ -112,4 +111,4 @@ export function Register() {
       </div>
     </FormRegister>
   );
-}
+};

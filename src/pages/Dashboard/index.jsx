@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function Dashboard() {
+export const Dashboard = () => {
   const [dataUser, setDataUser] = useState([]);
   const navigate = useNavigate();
 
@@ -22,12 +22,11 @@ export function Dashboard() {
     };
     CardRequisition();
   }, []);
-  console.log(dataUser);
 
-  function cleanStorage() {
+  const cleanStorage = () => {
     localStorage.clear();
     navigate("/login");
-  }
+  };
 
   return (
     <DashboardContainer>
@@ -47,4 +46,4 @@ export function Dashboard() {
       </p>
     </DashboardContainer>
   );
-}
+};
