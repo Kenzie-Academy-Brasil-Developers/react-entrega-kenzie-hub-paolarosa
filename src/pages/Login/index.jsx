@@ -16,10 +16,7 @@ export const Login = ({ setAuthentication }) => {
 
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
-    password: yup
-      .string()
-      .required("Senha obrigatória com 4 a 8 caracteres")
-      .matches("^.{4,8}$"),
+    password: yup.string().required("Senha obrigatória com 4 a 8 caracteres"),
   });
 
   const {
