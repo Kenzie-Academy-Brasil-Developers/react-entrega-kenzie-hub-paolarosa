@@ -1,37 +1,42 @@
 import Logo from "../../assets/Logo.svg";
-import { DashboardContainer, LinkOut } from "./styles";
-import { api } from "../../services/api.js";
-import { useEffect } from "react";
+import Vector from "../../assets/Vector.svg";
+import { DashboardContainer } from "./styles";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import Modal from "./modalCreateTechs";
+import { TechContext } from "../../context/TechContext";
+import ModalUpdate from "./modalUpdateTech";
 
 export const Dashboard = () => {
-  const [dataUser, setDataUser] = useState([]);
+  const { dataUser, validateUser } = useContext(UserContext);
+  const { deleteTechsRequisition } = useContext(TechContext);
+  const [isModal, setIsModal] = useState(false);
+  const [isModalUpdate, setIsModalUpdate] = useState(false);
+  const [techSelected, setTechSelected] = useState({});
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const CardRequisition = () => {
-      const token = localStorage.getItem("authToken");
-      api.defaults.headers.authorization = `Bearer ${token}`;
-      api
-        .get("https://kenziehub.herokuapp.com/profile")
-        .then((response) => {
-          setDataUser(response.data);
-        })
-        .catch((error) => console.log(error));
-    };
-    CardRequisition();
-  }, []);
 
   const cleanStorage = () => {
     localStorage.clear();
     navigate("/login");
   };
+  const openModal = () => {
+    setIsModal((oldState) => !oldState);
+  };
+  const openModalUpdate = (tech) => {
+    setIsModalUpdate((oldState) => !oldState);
+    setTechSelected(tech);
+  };
+
+  useEffect(() => {
+    return validateUser();
+  });
 
   return (
     <DashboardContainer>
       <div className="imgLogo">
-        <img src={Logo} />
+        <img alt="" src={Logo} />
         <button onClick={cleanStorage} className="buttonOut">
           Sair
         </button>
@@ -40,10 +45,41 @@ export const Dashboard = () => {
         <h2>Olá, {dataUser.name}</h2>
         <h3>{dataUser.course_module}</h3>
       </div>
-      <p>
-        Que pena! Estamos em desenvolvimento :( <br />
-        Nossa aplicação está em desenvolvimento, em breve teremos novidades
-      </p>
+      <div className="TitleTech">
+        <h2>Tecnologias</h2>
+        <div className="divButtonClose">
+          <button onClick={openModal} className="buttonAdd">
+            +
+          </button>
+        </div>
+      </div>
+      <ul>
+        {dataUser.techs &&
+          dataUser.techs.map((tech, index) => (
+            <li key={index}>
+              <h4
+                onClick={() => {
+                  openModalUpdate(tech);
+                }}
+              >
+                {tech.title}
+              </h4>
+              <div className="divStatusTrash">
+                <h5>{tech.status}</h5>
+                <button onClick={() => deleteTechsRequisition(tech.id)}>
+                  <img alt="" className="trash" src={Vector} />
+                </button>
+              </div>
+            </li>
+          ))}
+      </ul>
+      {isModal && <Modal openModal={openModal} />}
+      {isModalUpdate && (
+        <ModalUpdate
+          techSelected={techSelected}
+          openModalUpdate={openModalUpdate}
+        />
+      )}
     </DashboardContainer>
   );
 };
