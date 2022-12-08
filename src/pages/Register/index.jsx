@@ -1,18 +1,15 @@
 import { Link } from "./styles";
-import { api } from "../../services/api.js";
 import Logo from "../../assets/Logo.svg";
 import { FormRegister } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export const Register = () => {
-  const navigate = useNavigate();
-  const handleRedirect = () => {
-    navigate("/login");
-  };
+  const { registerRequisition } = useContext(UserContext);
+
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().required("Email obrigatório").email("Email inválido"),
@@ -37,22 +34,6 @@ export const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const submit = (data) => {
-    api
-      .post("/users", data)
-      .then((response) => {
-        toast("Conta criada com sucesso!");
-        console.log(response.data);
-        setTimeout(() => {
-          handleRedirect();
-        }, 1000);
-      })
-      .catch((error) => {
-        toast("Ops! Algo deu errado");
-        console.log(error);
-      });
-  };
-
   return (
     <FormRegister>
       <div className="divContainer">
@@ -60,7 +41,7 @@ export const Register = () => {
           <img src={Logo} />
           <Link to={"/login"}>Voltar</Link>
         </div>
-        <form onSubmit={handleSubmit(submit)}>
+        <form onSubmit={handleSubmit(registerRequisition)}>
           <h2>Crie sua conta</h2>
           <h3>Rápido e grátis, vamos nessa</h3>
           <label>Nome</label>

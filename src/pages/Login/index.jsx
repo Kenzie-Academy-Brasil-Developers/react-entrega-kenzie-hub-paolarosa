@@ -1,22 +1,21 @@
 import { LinkRegister } from "./styles";
-import { api } from "../../services/api.js";
 import Logo from "../../assets/Logo.svg";
 import { FormLogin } from "./styles";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { toast } from "react-toastify";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../context/UserContext";
 
-export const Login = ({ setAuthentication }) => {
-  const navigate = useNavigate();
-  const handleRedirect = () => {
-    navigate("/dashboard");
-  };
+export const Login = () => {
+  const { loginRequisition, CardRequisition } = useContext(UserContext);
 
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
-    password: yup.string().required("Senha obrigatória com 4 a 8 caracteres"),
+    password: yup
+      .string()
+      .required("Senha obrigatória com 4 a 8 caracteres")
+      .matches("^.{4,8}$"),
   });
 
   const {
@@ -27,27 +26,14 @@ export const Login = ({ setAuthentication }) => {
     resolver: yupResolver(formSchema),
   });
 
-  const loginRequisition = (data) => {
-    api
-      .post("https://kenziehub.herokuapp.com/sessions", data)
-      .then((response) => {
-        console.log(response.data);
-        localStorage.clear();
-        localStorage.setItem("authToken", response.data.token);
-        setTimeout(() => {
-          handleRedirect();
-        }, 1000);
-      })
-      .catch((error) => {
-        toast("Email ou senha incorretos");
-        console.log(error);
-      });
-  };
+  useEffect(() => {
+    return CardRequisition();
+  });
 
   return (
     <FormLogin>
       <div className="divContainer">
-        <img src={Logo} />
+        <img alt="" src={Logo} />
         <form onSubmit={handleSubmit(loginRequisition)}>
           <h2>Login</h2>
           <label htmlFor="email">Email</label>
@@ -69,7 +55,6 @@ export const Login = ({ setAuthentication }) => {
             Entrar
           </button>
           <h4>Ainda não possui uma conta?</h4>
-
           <LinkRegister to={"/"}>Cadastre-se</LinkRegister>
         </form>
       </div>

@@ -15,10 +15,7 @@ export const RoutesMain = () => {
     return (
       <Routes>
         <Route path="/" element={<Register />} />
-        <Route
-          path="/login"
-          element={<Login setAuthentication={setAuthentication} />}
-        />
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     );
