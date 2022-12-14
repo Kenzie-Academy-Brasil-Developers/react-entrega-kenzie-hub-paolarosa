@@ -55,7 +55,11 @@ export const Login = () => {
             Entrar
           </button>
           <h4>Ainda não possui uma conta?</h4>
+<<<<<<< HEAD
           <LinkRegister to={"/register"}>Cadastre-se</LinkRegister>
+=======
+          <LinkRegister to={"/"}>Cadastre-se</LinkRegister>
+>>>>>>> fcf9617ad768b1f76bfcd0834706f621620bafd8
         </form>
       </div>
     </FormLogin>

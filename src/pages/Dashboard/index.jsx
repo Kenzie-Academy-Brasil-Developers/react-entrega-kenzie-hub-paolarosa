@@ -2,6 +2,10 @@ import Logo from "../../assets/Logo.svg";
 import Vector from "../../assets/Vector.svg";
 import { DashboardContainer } from "./styles";
 import { useContext, useEffect } from "react";
+<<<<<<< HEAD
+=======
+import { useState } from "react";
+>>>>>>> fcf9617ad768b1f76bfcd0834706f621620bafd8
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import Modal from "./modalCreateTechs";
@@ -9,6 +13,7 @@ import { TechContext } from "../../context/TechContext";
 import ModalUpdate from "./modalUpdateTech";
 
 export const Dashboard = () => {
+<<<<<<< HEAD
   const {
     dataUser,
     validateUser,
@@ -20,6 +25,13 @@ export const Dashboard = () => {
     setTechSelected,
   } = useContext(UserContext);
   const { deleteTechsRequisition } = useContext(TechContext);
+=======
+  const { dataUser, validateUser } = useContext(UserContext);
+  const { deleteTechsRequisition } = useContext(TechContext);
+  const [isModal, setIsModal] = useState(false);
+  const [isModalUpdate, setIsModalUpdate] = useState(false);
+  const [techSelected, setTechSelected] = useState({});
+>>>>>>> fcf9617ad768b1f76bfcd0834706f621620bafd8
   const navigate = useNavigate();
 
   const cleanStorage = () => {
