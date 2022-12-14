@@ -2,7 +2,6 @@ import Logo from "../../assets/Logo.svg";
 import Vector from "../../assets/Vector.svg";
 import { DashboardContainer } from "./styles";
 import { useContext, useEffect } from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import Modal from "./modalCreateTechs";
