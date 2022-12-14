@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api.js";
@@ -7,12 +7,9 @@ export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [dataUser, setDataUser] = useState([]);
-<<<<<<< HEAD
   const [isModal, setIsModal] = useState(false);
   const [isModalUpdate, setIsModalUpdate] = useState(false);
   const [techSelected, setTechSelected] = useState({});
-=======
->>>>>>> fcf9617ad768b1f76bfcd0834706f621620bafd8
 
   const navigate = useNavigate();
   const handleRedirect = () => {
@@ -21,11 +18,7 @@ export const UserProvider = ({ children }) => {
 
   const navigateRegister = useNavigate();
   const handleRedirectRegister = () => {
-<<<<<<< HEAD
     navigateRegister("/");
-=======
-    navigateRegister("/login");
->>>>>>> fcf9617ad768b1f76bfcd0834706f621620bafd8
   };
 
   const registerRequisition = (data) => {
@@ -83,7 +76,7 @@ export const UserProvider = ({ children }) => {
       .then((response) => {
         setDataUser(response.data);
       })
-      .catch((error) => navigate("/login"));
+      .catch((error) => navigate("/"));
   };
 
   return (
@@ -95,15 +88,12 @@ export const UserProvider = ({ children }) => {
         dataUser,
         setDataUser,
         validateUser,
-<<<<<<< HEAD
         isModal,
         setIsModal,
         isModalUpdate,
         setIsModalUpdate,
         techSelected,
         setTechSelected,
-=======
->>>>>>> fcf9617ad768b1f76bfcd0834706f621620bafd8
       }}
     >
       {children}
