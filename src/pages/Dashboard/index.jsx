@@ -10,11 +10,17 @@ import { TechContext } from "../../context/TechContext";
 import ModalUpdate from "./modalUpdateTech";
 
 export const Dashboard = () => {
-  const { dataUser, validateUser } = useContext(UserContext);
+  const {
+    dataUser,
+    validateUser,
+    isModal,
+    setIsModal,
+    isModalUpdate,
+    setIsModalUpdate,
+    techSelected,
+    setTechSelected,
+  } = useContext(UserContext);
   const { deleteTechsRequisition } = useContext(TechContext);
-  const [isModal, setIsModal] = useState(false);
-  const [isModalUpdate, setIsModalUpdate] = useState(false);
-  const [techSelected, setTechSelected] = useState({});
   const navigate = useNavigate();
 
   const cleanStorage = () => {

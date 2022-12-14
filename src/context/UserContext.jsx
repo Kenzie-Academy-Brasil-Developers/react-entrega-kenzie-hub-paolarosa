@@ -7,6 +7,9 @@ export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [dataUser, setDataUser] = useState([]);
+  const [isModal, setIsModal] = useState(false);
+  const [isModalUpdate, setIsModalUpdate] = useState(false);
+  const [techSelected, setTechSelected] = useState({});
 
   const navigate = useNavigate();
   const handleRedirect = () => {
@@ -15,7 +18,7 @@ export const UserProvider = ({ children }) => {
 
   const navigateRegister = useNavigate();
   const handleRedirectRegister = () => {
-    navigateRegister("/login");
+    navigateRegister("/");
   };
 
   const registerRequisition = (data) => {
@@ -85,6 +88,12 @@ export const UserProvider = ({ children }) => {
         dataUser,
         setDataUser,
         validateUser,
+        isModal,
+        setIsModal,
+        isModalUpdate,
+        setIsModalUpdate,
+        techSelected,
+        setTechSelected,
       }}
     >
       {children}

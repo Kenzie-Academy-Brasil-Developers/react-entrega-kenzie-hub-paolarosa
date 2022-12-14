@@ -39,7 +39,7 @@ export const Register = () => {
       <div className="divContainer">
         <div className="imgLogo">
           <img src={Logo} />
-          <Link to={"/login"}>Voltar</Link>
+          <Link to={"/"}>Voltar</Link>
         </div>
         <form onSubmit={handleSubmit(registerRequisition)}>
           <h2>Crie sua conta</h2>

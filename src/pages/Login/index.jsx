@@ -55,7 +55,7 @@ export const Login = () => {
             Entrar
           </button>
           <h4>Ainda não possui uma conta?</h4>
-          <LinkRegister to={"/"}>Cadastre-se</LinkRegister>
+          <LinkRegister to={"/register"}>Cadastre-se</LinkRegister>
         </form>
       </div>
     </FormLogin>
